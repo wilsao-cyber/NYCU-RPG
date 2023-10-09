@@ -44,7 +44,6 @@ func _ready():
 
 func _ChooseChara(a):
 	var change = party[0]
-	print(party[0]["Name"],party[1]["Name"],party[2]["Name"])
 	party[0] = party[a]
 	party[a] = change
 	print(party[0]["Name"])
