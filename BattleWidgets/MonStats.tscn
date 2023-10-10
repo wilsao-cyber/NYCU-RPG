@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://pr2kwxyrnwfx"]
+
+[ext_resource type="Script" path="res://BattleWidgets/MonStats.gd" id="1_hbdim"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8vrf"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qw2t"]
+bg_color = Color(1, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect"]
+offset_right = 438.0
+offset_bottom = 173.0
+script = ExtResource("1_hbdim")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 105.0
+offset_right = 377.0
+offset_bottom = 132.0
+theme_override_styles/background = SubResource("StyleBoxFlat_j8vrf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8qw2t")
+
+[node name="LVLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 24.0
+offset_right = 98.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 42
+text = "LV 0"
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 26.0
+offset_right = 367.0
+offset_bottom = 87.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 42
+text = "Name"

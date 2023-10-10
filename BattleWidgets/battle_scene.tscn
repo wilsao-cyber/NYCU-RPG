@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxlqwxgahwbdk"]
+[gd_scene load_steps=6 format=3 uid="uid://bxlqwxgahwbdk"]
 
 [ext_resource type="Script" path="res://BattleWidgets/battle_scene.gd" id="1_iqali"]
-[ext_resource type="Texture2D" uid="uid://dvln0ioy4448l" path="res://Images/BackGroundPic.png" id="2_gyjl8"]
+[ext_resource type="PackedScene" uid="uid://dbrti5fxpbgmp" path="res://CharaFod/chara_base.tscn" id="3_61d63"]
 [ext_resource type="Texture2D" uid="uid://d2cnr168xk4m2" path="res://Images/rectbox.png" id="3_i72q6"]
 [ext_resource type="Texture2D" uid="uid://bjn8l0o7oclhh" path="res://Images/normal.png" id="4_r0dng"]
+[ext_resource type="PackedScene" uid="uid://pr2kwxyrnwfx" path="res://BattleWidgets/MonStats.tscn" id="5_0jj3y"]
 
 [node name="BattleScene" type="Control"]
 layout_mode = 3
@@ -22,7 +23,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_gyjl8")
+texture = ExtResource("4_r0dng")
+
+[node name="CharaBase" parent="CanvasLayer" instance=ExtResource("3_61d63")]
+position = Vector2(330, 665)
+scale = Vector2(2, 2)
+
+[node name="CharaBase2" parent="CanvasLayer" instance=ExtResource("3_61d63")]
+position = Vector2(1598, 373)
+scale = Vector2(2, 2)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer"]
 anchors_preset = 7
@@ -167,9 +176,76 @@ text = "角色1"
 icon = ExtResource("4_r0dng")
 expand_icon = true
 
+[node name="SkillButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 93.0
+offset_top = -327.0
+offset_right = 620.0
+offset_bottom = -207.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 42
+text = "招式1"
+
+[node name="SkillButton2" type="Button" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 700.0
+offset_top = -327.0
+offset_right = 1227.0
+offset_bottom = -207.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 42
+text = "招式2
+"
+
+[node name="SkillButton3" type="Button" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 93.0
+offset_top = -180.0
+offset_right = 620.0
+offset_bottom = -60.0001
+grow_vertical = 0
+theme_override_font_sizes/font_size = 42
+text = "招式3"
+
+[node name="SkillButton4" type="Button" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 700.0
+offset_top = -180.0
+offset_right = 1227.0
+offset_bottom = -60.0001
+grow_vertical = 0
+theme_override_font_sizes/font_size = 42
+text = "招式4"
+
+[node name="ColorRect" parent="CanvasLayer" instance=ExtResource("5_0jj3y")]
+offset_left = 478.0
+offset_top = 540.0
+offset_right = 916.0
+offset_bottom = 713.0
+color = Color(0, 1, 0, 1)
+
+[node name="ColorRect2" parent="CanvasLayer" instance=ExtResource("5_0jj3y")]
+offset_left = 904.0
+offset_top = 48.0
+offset_right = 1342.0
+offset_bottom = 221.0
+color = Color(0.498039, 0.470588, 1, 1)
+
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/ChooseButton" to="." method="_on_choose_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/CharaBox/VBoxContainer/CharaButton1" to="." method="_on_chara_button_1_pressed"]
 [connection signal="pressed" from="CanvasLayer/CharaBox/VBoxContainer/CharaButton2" to="." method="_on_chara_button_2_pressed"]
 [connection signal="pressed" from="CanvasLayer/CharaBox/VBoxContainer/CharaButton3" to="." method="_on_chara_button_3_pressed"]
 [connection signal="pressed" from="CanvasLayer/CharaBox/VBoxContainer/CharaButton4" to="." method="_on_chara_button_4_pressed"]
 [connection signal="pressed" from="CanvasLayer/CharaBox/VBoxContainer/CharaButton5" to="." method="_on_chara_button_5_pressed"]
+[connection signal="pressed" from="CanvasLayer/SkillButton" to="." method="_on_skill_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/SkillButton2" to="." method="_on_skill_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/SkillButton3" to="." method="_on_skill_button_3_pressed"]
+[connection signal="pressed" from="CanvasLayer/SkillButton4" to="." method="_on_skill_button_4_pressed"]
