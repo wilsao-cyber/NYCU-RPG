@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://drne1crlhrt8j"]
+
+[ext_resource type="Texture2D" uid="uid://d2cnr168xk4m2" path="res://Images/rectbox.png" id="1_64vp7"]
+[ext_resource type="Script" path="res://BattleWidgets/nine_patch_rect.gd" id="2_m522p"]
+
+[node name="_item_box" type="NinePatchRect"]
+custom_minimum_size = Vector2(1100, 120)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_64vp7")
+region_rect = Rect2(9, 7.5, 482, 287)
+patch_margin_left = 8
+patch_margin_top = 28
+patch_margin_right = 9
+script = ExtResource("2_m522p")
+
+[node name="NameText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 15.0
+offset_right = 582.0
+offset_bottom = 110.0
+theme_override_font_sizes/font_size = 42
+text = "Name"
+vertical_alignment = 1
+
+[node name="NumText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 565.0
+offset_top = 10.0
+offset_right = 810.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 42
+text = "x0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 895.0
+offset_top = 16.0
+offset_right = 1039.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 42
+text = "使用"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

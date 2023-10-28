@@ -134,3 +134,8 @@ func _on_skill_button_3_pressed():
 func _on_skill_button_4_pressed():
 	_phyAtk(curSkills[3]["id"])
 	pass # Replace with function body.
+
+
+func _on_item_button_pressed():
+	get_tree().change_scene_to_file("res://BattleWidgets/item_box.tscn")
+	pass # Replace with function body.

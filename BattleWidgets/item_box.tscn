@@ -1,0 +1,294 @@
+[gd_scene load_steps=5 format=3 uid="uid://c03edq20neajq"]
+
+[ext_resource type="Script" path="res://BattleWidgets/item_box.gd" id="1_vuvoo"]
+[ext_resource type="Texture2D" uid="uid://bjn8l0o7oclhh" path="res://Images/normal.png" id="2_wqkab"]
+[ext_resource type="Texture2D" uid="uid://d4cwmstr276rp" path="res://icon.svg" id="3_cdrux"]
+[ext_resource type="PackedScene" uid="uid://drne1crlhrt8j" path="res://BattleWidgets/nine_patch_rect.tscn" id="4_rim54"]
+
+[node name="ItemBox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vuvoo")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.721569)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -875.0
+offset_top = -495.0
+offset_right = 875.0
+offset_bottom = 495.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.839216, 0.439216, 0.141176, 1)
+
+[node name="MonsChoose" type="NinePatchRect" parent="ColorRect2"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = -466.0
+offset_right = 368.0
+offset_bottom = 432.0
+grow_vertical = 2
+texture = ExtResource("2_wqkab")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect2/MonsChoose"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ColorRect2/MonsChoose/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "選擇怪物"
+horizontal_alignment = 1
+
+[node name="Mons1" type="Button" parent="ColorRect2/MonsChoose/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(0.47451, 0.47451, 0.47451, 1)
+icon = ExtResource("3_cdrux")
+icon_alignment = 1
+
+[node name="Mons2" type="Button" parent="ColorRect2/MonsChoose/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(0.47451, 0.47451, 0.47451, 1)
+icon = ExtResource("3_cdrux")
+icon_alignment = 1
+
+[node name="Mons3" type="Button" parent="ColorRect2/MonsChoose/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(0.47451, 0.47451, 0.47451, 1)
+icon = ExtResource("3_cdrux")
+icon_alignment = 1
+
+[node name="Mons4" type="Button" parent="ColorRect2/MonsChoose/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(0.47451, 0.47451, 0.47451, 1)
+icon = ExtResource("3_cdrux")
+icon_alignment = 1
+
+[node name="Mons5" type="Button" parent="ColorRect2/MonsChoose/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(0.47451, 0.47451, 0.47451, 1)
+icon = ExtResource("3_cdrux")
+icon_alignment = 1
+
+[node name="Mons6" type="Button" parent="ColorRect2/MonsChoose/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(0.47451, 0.47451, 0.47451, 1)
+icon = ExtResource("3_cdrux")
+icon_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ColorRect2"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1334.0
+offset_top = -462.0
+offset_right = -68.0
+offset_bottom = 430.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("2_wqkab")
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect2/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -558.0
+offset_top = -334.0
+offset_right = 546.0
+offset_bottom = 422.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.32549)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect2/NinePatchRect/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer"]
+layout_mode = 2
+
+[node name="NinePatchRect" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect2" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect3" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect4" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect5" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect6" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect7" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect8" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect9" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect10" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect11" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect12" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect13" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect14" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect15" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect16" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect17" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect18" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect19" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect20" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect21" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect22" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect23" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect24" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect25" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect26" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect27" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect28" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect29" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="NinePatchRect30" parent="ColorRect2/NinePatchRect/ColorRect/ScrollContainer/VBoxContainer" instance=ExtResource("4_rim54")]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ColorRect2/NinePatchRect"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 16.0
+offset_right = 282.0
+offset_bottom = 107.0
+theme_override_font_sizes/font_size = 46
+text = "道具"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -430.0
+offset_top = 100.0
+offset_right = -196.0
+offset_bottom = 180.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 42
+text = "返回"
+
+[connection signal="pressed" from="ColorRect2/MonsChoose/VBoxContainer/Mons1" to="." method="_on_mons_1_pressed"]
+[connection signal="pressed" from="ColorRect2/MonsChoose/VBoxContainer/Mons2" to="." method="_on_mons_2_pressed"]
+[connection signal="pressed" from="ColorRect2/MonsChoose/VBoxContainer/Mons3" to="." method="_on_mons_3_pressed"]
+[connection signal="pressed" from="ColorRect2/MonsChoose/VBoxContainer/Mons4" to="." method="_on_mons_4_pressed"]
+[connection signal="pressed" from="ColorRect2/MonsChoose/VBoxContainer/Mons5" to="." method="_on_mons_5_pressed"]
+[connection signal="pressed" from="ColorRect2/MonsChoose/VBoxContainer/Mons6" to="." method="_on_mons_6_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
