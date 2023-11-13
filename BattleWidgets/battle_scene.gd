@@ -33,20 +33,8 @@ enum SystemLogic{
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	party = General.Party
-	var partyLen = party.size()
-	partyAlive = [charaButton01,charaButton02,charaButton03,charaButton04,charaButton05]
-	if partyLen>1:
-		for i in range(0,partyLen-1):
-			partyAlive[i].disabled = !party[i+1]["isAlive"]
-	if partyLen<5:
-		for i in range(partyLen-1,5):
-			partyAlive[i].disabled = true
-	CurChara = party[0]
-	CurEnemy = General.Enemy[0]
-	_SetCharaStatus(MyStatsBar,CurChara)
-	_SetCharaStatus(EnStatsBar,CurEnemy)
-	_Skills()
+	CurSys = SystemLogic.StartBattle
+	SystemStatus()
 	pass # Replace with function body.
 
 func _ChooseChara(a):
@@ -58,6 +46,17 @@ func _ChooseChara(a):
 	if !party[a]["isAlive"]:
 		partyAlive[a-1].disabled = true
 	_Skills()
+	CurChara = party[0]
+	match CurSys:
+		SystemLogic.PlayerDied:
+			CurBattle = BattleLogic.PlayerTurn
+			CurSys = null
+			_SetCharaStatus(MyStatsBar,CurChara)
+			BattleStatus()
+		_:
+			CurBattle = BattleLogic.EnemyTurn
+			_SetCharaStatus(MyStatsBar,CurChara)
+			BattleStatus()
 	pass
 
 
@@ -125,6 +124,16 @@ func _phyAtk(id,tar):
 	if targetCom["currentHP"]<1:
 		targetCom["currentHP"] = 0
 		targetCom["isAlive"] = false
+		_SetCharaStatus(tarBar,targetCom)
+		match tar:
+			0:
+				CurSys = SystemLogic.EnemyDied
+				SystemStatus()
+				pass
+			1:
+				CurSys = SystemLogic.PlayerDied
+				SystemStatus()
+				pass
 	
 	match tar:
 		0:
@@ -159,6 +168,7 @@ func _on_skill_button_4_pressed():
 
 
 func _on_item_button_pressed():
+	General.is_change_item = true
 	get_tree().change_scene_to_file("res://BattleWidgets/item_box.tscn")
 	pass # Replace with function body.
 func _on_enemy_phyAtk():
@@ -185,5 +195,52 @@ func BattleStatus():
 			_on_enemy_phyAtk()
 			pass
 		BattleLogic.SystemTurn:
+			pass
+	pass
+
+func SystemStatus():
+	match CurSys:
+		SystemLogic.StartBattle:
+			party = General.Party
+			var partyLen = party.size()
+			partyAlive = [charaButton01,charaButton02,charaButton03,charaButton04,charaButton05]
+			if partyLen>1:
+				for i in range(0,partyLen-1):
+					partyAlive[i].disabled = !party[i+1]["isAlive"]
+			if partyLen<5:
+				for i in range(partyLen-1,5):
+					partyAlive[i].disabled = true
+			CurChara = party[0]
+			CurEnemy = General.Enemy[0]
+			_SetCharaStatus(MyStatsBar,CurChara)
+			_SetCharaStatus(EnStatsBar,CurEnemy)
+			_Skills()
+			ChooseButton.disabled = true
+			ItemButton.disabled = true
+			RunButton.disabled = true
+			for i in skillButtons:
+				i.disabled = true
+			if General.is_change_item:
+				General.is_change_item = false
+				CurBattle = BattleLogic.EnemyTurn
+				print("yes")
+			else :
+				CurBattle = BattleLogic.PlayerTurn
+			BattleStatus()
+			
+		SystemLogic.PlayerDied:
+			General.AliveCount-=1
+			if General.AliveCount==0:
+				General.winLose = "Lose"
+				CurSys = SystemLogic.EndBattle
+				SystemStatus()
+			else:
+				_on_choose_button_pressed()
+		SystemLogic.EnemyDied:
+			General.winLose = "Win"
+			CurSys = SystemLogic.EndBattle
+			SystemStatus()
+		SystemLogic.EndBattle:
+			get_tree().change_scene_to_file("res://BattleWidgets/win_lose.tscn")
 			pass
 	pass
