@@ -1,7 +1,7 @@
 extends Control
 
-@export var CurBattle := BattleLogic
-@export var CurSys := SystemLogic
+var CurBattle
+var CurSys
 @export var CurChara = {}
 @export var CurEnemy = {}
 var curSkills = []
@@ -14,8 +14,10 @@ var partyAlive = []
 @onready var charaButton05 = $CanvasLayer/CharaBox/VBoxContainer/CharaButton5
 @onready var MyStatsBar = $CanvasLayer/ColorRect
 @onready var EnStatsBar = $CanvasLayer/ColorRect2
-
-
+@onready var ChooseButton = $CanvasLayer/VBoxContainer/ChooseButton
+@onready var ItemButton = $CanvasLayer/VBoxContainer/ItemButton
+@onready var RunButton = $CanvasLayer/VBoxContainer/RunButton
+@onready var skillButtons = [$CanvasLayer/SkillButton, $CanvasLayer/SkillButton2, $CanvasLayer/SkillButton3, $CanvasLayer/SkillButton4]
 enum BattleLogic{
 	PlayerTurn,
 	EnemyTurn,
@@ -107,35 +109,81 @@ func _Skills():
 	$CanvasLayer/SkillButton4.text =curSkills[3]["name"]
 	pass
 
-func _phyAtk(id):
-	CurEnemy["currentHP"] = CurEnemy["currentHP"]-curSkills[id]["pow"]
-	if CurEnemy["currentHP"]<1:
-		CurEnemy["currentHP"] = 0
-		CurEnemy["isAlive"] = false
-	_SetCharaStatus(EnStatsBar,CurEnemy)
+func _phyAtk(id,tar):
+	var targetCom = null
+	var tarBar = null
+	match tar:
+		0:
+			targetCom = CurEnemy
+			tarBar = EnStatsBar
+			pass
+		1:
+			targetCom = CurChara
+			tarBar = MyStatsBar
+			pass
+	targetCom["currentHP"] = targetCom["currentHP"]-curSkills[id]["pow"]
+	if targetCom["currentHP"]<1:
+		targetCom["currentHP"] = 0
+		targetCom["isAlive"] = false
+	
+	match tar:
+		0:
+			_SetCharaStatus(tarBar,targetCom)
+			CurBattle = BattleLogic.EnemyTurn
+			BattleStatus()
+		1:
+			_SetCharaStatus(tarBar,targetCom)
+			CurBattle = BattleLogic.PlayerTurn
+			BattleStatus()
 	pass
 
 
 func _on_skill_button_pressed():
-	_phyAtk(curSkills[0]["id"])
+	_phyAtk(curSkills[0]["id"],0)
 	pass # Replace with function body.
 
 
 func _on_skill_button_2_pressed():
-	_phyAtk(curSkills[1]["id"])
+	_phyAtk(curSkills[1]["id"],0)
 	pass # Replace with function body.
 
 
 func _on_skill_button_3_pressed():
-	_phyAtk(curSkills[2]["id"])
+	_phyAtk(curSkills[2]["id"],0)
 	pass # Replace with function body.
 
 
 func _on_skill_button_4_pressed():
-	_phyAtk(curSkills[3]["id"])
+	_phyAtk(curSkills[3]["id"],0)
 	pass # Replace with function body.
 
 
 func _on_item_button_pressed():
 	get_tree().change_scene_to_file("res://BattleWidgets/item_box.tscn")
 	pass # Replace with function body.
+func _on_enemy_phyAtk():
+	var enSkill = CurEnemy["skills"]
+	var nowSkill = randi_range(0,len(enSkill)-1)
+	_phyAtk(enSkill[nowSkill],1)
+	pass
+
+func BattleStatus():
+	match CurBattle:
+		BattleLogic.PlayerTurn:
+			ChooseButton.disabled = false
+			ItemButton.disabled = false
+			RunButton.disabled = false
+			for i in skillButtons:
+				i.disabled = false
+			pass
+		BattleLogic.EnemyTurn:
+			ChooseButton.disabled = true
+			ItemButton.disabled = true
+			RunButton.disabled = true
+			for i in skillButtons:
+				i.disabled = true
+			_on_enemy_phyAtk()
+			pass
+		BattleLogic.SystemTurn:
+			pass
+	pass
